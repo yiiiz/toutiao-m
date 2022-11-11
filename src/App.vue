@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 路由的出口 -->
     <router-view/>
-    <!-- <h1>h黑马头条</h1>
+     <!-- <h1>h黑马头条</h1>
     <div>
       <i class="toutiao toutiao-shipin"></i>
     </div>
@@ -11,7 +11,7 @@
     <van-button type="default">默认按钮</van-button>
     <van-button type="warning">警告按钮</van-button>
     <van-button type="danger">危险按钮</van-button>
-    <div class="box" >Hellow World </div> -->
+    <div class="box" >Hellow World </div>  -->
   </div>
 </template>
 <script>
