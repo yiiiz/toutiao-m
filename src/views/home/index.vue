@@ -1,32 +1,72 @@
 <template>
   <div class="home-container">
-   首页
+    <!-- 导航栏 -->
+    <van-nav-bar class="page-nav-bar" fixed>
+      <van-button
+        class="search-btn"
+        slot="title"
+        type="info"
+        size="small"
+        round
+        icon="search"
+      >搜索</van-button>
+    </van-nav-bar>
+    <!-- /导航栏 -->
+    <!-- w文章频道列表 -->
+    <!-- 通过 v-model 绑定当前激活标签对应的索引值，默认情况下启用第一个标签。 -->
+    <!-- 通过 animated 属性可以开启切换标签内容时的转场动画。 -->
+    <van-tabs class="channel-tabs" v-model="active" animated swipeable>
+      <van-tab
+        :title="channel.name"
+        v-for="channel in channels"
+        :key="channel.id"
+        >
+        <!-- 频道的文章列表 -->
+        <article-list :channel="channel"/>
+        <!-- /频道的文章列表 -->
+      </van-tab>
+      <div slot="nav-right" class="placeholder"></div>
+      <div slot="nav-right" class="hamburger-btn">
+        <i class="toutiao toutiao-gengduo"></i>
+      </div>
+    </van-tabs>
+    <!-- w文章频道列表 -->
+
   </div>
 </template>
 
 <script>
-
+import { getUserChannels } from '@/api/user'
+import ArticleList from './components/article-list'
 export default {
   name: 'HomeIndex',
   components: {
-
+    ArticleList
   },
   props: {},
   data () {
     return {
-
+      active: 0, // 控制激活的标签项，其实就是索引
+      channels: []// 频道列表
     }
   },
   computed: {},
   watch: {},
   created () {
-
+    this.loadChannels()
   },
   mounted () {
 
   },
   methods: {
-
+    async loadChannels () {
+      try {
+        const { data } = await getUserChannels()
+        this.channels = data.data.channels
+      } catch (err) {
+        this.$toast('获取用户频道失败')
+      }
+    }
   }
 }
 </script>
