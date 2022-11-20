@@ -178,6 +178,8 @@ export default {
     background-color: #ededed;
     font-size: 22px;
     color: #666;
+    white-space: nowrap;//文字不折行
+
   }
 
   .login-btn-wrap {
