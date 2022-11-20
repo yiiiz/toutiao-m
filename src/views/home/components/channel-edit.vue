@@ -136,23 +136,22 @@ export default {
         }
     },
     async onAddChannel (channel) {
-        this.myChannels.push(channel)
-        //数据持久化处理
-        if (this.user) {
-            try {
+        try {
+            this.myChannels.push(channel)
+            //数据持久化处理
+            if (this.user) {
                 //已登录，把数据请求接口放到线上
                 await addUserChannel({
                     id: channel.id, //频道ID
                     seq: this.myChannels.length //序号
                 })
-            } catch (err) {
-                this.$toast('保存失败，请稍后重试')
+            }else{
+                //未登录，把数据存储到本地
+                setItem('TOUTIAO_CHANNELS', this.myChannels)
             }
-        }else{
-            //未登录，把数据存储到本地
-            setItem('TOUTIAO_CHANNELS', this.myChannels)
+        } catch (err) {
+            this.$toast('保存失败，请稍后重试')
         }
-        
     },
 
     onMyChannelClick ( channel, index) {
@@ -168,7 +167,7 @@ export default {
             if (index <= this.active){
                 //让激活频道的索引-1
                 this.$emit('update-active', this.active - 1, true)
-            }
+            } 
             //删除用户频道
             this.myChannels.splice(index, 1)
 
