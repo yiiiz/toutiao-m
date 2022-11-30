@@ -34,7 +34,7 @@
         <i class="toutiao toutiao-gengduo"></i>
       </div>
     </van-tabs>
-    <!-- w文章频道列表 -->
+    <!-- 文章频道列表 -->
 
     <!-- 频道编辑弹出层 -->
     <van-popup
@@ -130,11 +130,12 @@ export default {
 
 <style scoped lang="less">
 .home-container {
-  padding-top: 174px;
-  padding-bottom: 100px;
-  .van-nav-bar__title {
+  /deep/ .van-nav-bar__title{
     max-width: unset;
   }
+  padding-top: 174px;
+  padding-bottom: 100px;
+  
   .search-btn {
     width: 555px;
     height: 64px;
@@ -143,6 +144,7 @@ export default {
     font-size: 28px;
     .van-icon {
       font-size: 32px;
+      color: #fff;
     }
   }
 
